@@ -1,0 +1,85 @@
+{
+  "name": "vikfand/sharizard-wordpress",
+  "description": "Here is a short description of the plugin.",
+  "type": "project",
+  "license": "GPL-3.0-or-later",
+  "authors": [
+    {
+      "name": "Sharizard",
+      "email": "hi@sharizard.com",
+      "homepage": "https://www.example.com/",
+      "role": "Developer"
+    },
+    {
+      "name": "TourKick LLC (Clifford Paulick)",
+      "email": "tko@tourkick.com",
+      "homepage": "https://tourkick.com/",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.20",
+    "ext-json": "*",
+    "tgmpa/tgm-plugin-activation": "dev-develop",
+    "voku/stringy": "^6.2"
+  },
+  "require-dev": {
+    "php": "^7.0 || ^8.0",
+    "automattic/vipwpcs": "^2.0",
+    "squizlabs/php_codesniffer": "^3.5.5",
+    "codeception/module-asserts": "^1.0",
+    "codeception/module-cli": "^1.0",
+    "codeception/module-db": "^1.0",
+    "codeception/module-filesystem": "^1.0",
+    "codeception/module-phpbrowser": "^1.0",
+    "codeception/module-webdriver": "^1.0",
+    "codeception/util-universalframework": "^1.0",
+    "lucatume/wp-browser": "^2.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "SharizardWordpress\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "SharizardWordpress_Tests\\": "tests/",
+      "SharizardWordpress_Tests_Support\\": "tests/_support/",
+      "SharizardWordpress_Tests_Unit\\": "tests/unit/",
+      "SharizardWordpress_Tests_Wpunit\\": "tests/wpunit/"
+    }
+  },
+  "minimum-stability": "stable",
+  "repositories": [
+    {
+      "name": "moderntribe/TribalScents",
+      "type": "github",
+      "url": "https://github.com/moderntribe/TribalScents",
+      "no-api": true
+    }
+  ],
+  "config": {
+    "archive-format": "zip"
+  },
+  "archive": {
+    "exclude": [
+      "*",
+      "*/",
+      "!css/*",
+      "!dist/*",
+      "!js/*",
+      "!languages/*",
+      "!src/*",
+      "!vendor/*",
+      "!*.{php,txt}",
+      "*.zip",
+      ".*",
+      "/*.{js,json,md}",
+      "*.{jsx,pcss,sass,scss}",
+      "node_modules/",
+      "test/",
+      "tests/",
+      "sharizard-wordpress/"
+    ]
+  }
+}

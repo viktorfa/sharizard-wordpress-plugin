@@ -1,0 +1,18 @@
+[
+	{
+		"meta_key": "sharizard_wp_plugin__color-primary",
+		"meta_value": "#441461"
+	},
+	{
+		"meta_key": "sharizard_wp_plugin__company-name",
+		"meta_value": "Example Organization, Inc."
+	},
+	{
+		"meta_key": "sharizard_wp_plugin__website",
+		"meta_value": "https:\/\/example.local\/"
+	},
+	{
+		"meta_key": "sharizard_wp_plugin__checkboxes-are-nice",
+		"meta_value": "1"
+	}
+]

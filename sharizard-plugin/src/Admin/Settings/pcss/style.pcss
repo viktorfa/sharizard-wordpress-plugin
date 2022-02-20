@@ -1,0 +1,64 @@
+/**
+ * Surrounding imports with PurgeCSS ignore does not ignore that entire file. It has to be within each file.
+ *
+ * @link https://tailwindcss.com/docs/controlling-file-size/#setting-up-purgecss Quote:
+ * We recommend only applying Purgecss to Tailwind's utility classes, and not to base styles or component classes.
+ */
+@import './wordpress.pcss';
+@import './react-notifications.pcss';
+
+/* purgecss start ignore */
+@tailwind base;
+@tailwind components;
+/* purgecss end ignore */
+
+@tailwind utilities;
+
+/**
+ * Both Tailwind and WordPress add border rules to images but then remove one piece of it, both aiming to not have
+ * borders appear by default on every image, but they do it in different ways so we fix it to be what everyone expects.
+ */
+img {
+	@apply border-0 max-w-full;
+}
+
+/**
+ * Heading
+ */
+header {
+
+	img {
+		@apply max-w-md;
+	}
+
+	.version {
+		@apply italic rounded py-2 px-4 text-xs;
+		background-color: theme('colors.wpAdmin.bg' );
+	}
+}
+
+/**
+ * Main
+ */
+.main {
+	@apply mt-8;
+}
+
+.help-content {
+	@apply bg-white p-6;
+
+	img.help-image {
+		max-width: 220px;
+	}
+}
+
+/**
+ * Footer
+ */
+footer {
+	@apply text-gray-600 text-center italic p-6 border-t border-b border-gray-300 border-solid mt-8 mb-6 mx-0;
+
+	.container {
+		@apply my-0 mx-auto;
+	}
+}
