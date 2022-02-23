@@ -25,12 +25,12 @@
  * @package           SharizardWordpress
  *
  * @wordpress-plugin
- * Plugin Name:       Sharizard Wordpress
- * Plugin URI:        https://www.example.com/sharizard-wordpress/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Plugin Name:       Simple Social Media Preview
+ * Plugin URI:        https://www.sharizard.com/
+ * Description:       Simple social media preview images that just work.
  * Version:           1.0.0
  * Author:            Sharizard
- * Author URI:        https://www.example.com/
+ * Author URI:        https://www.sharizard.com/
  * License:           GPL version 3 or any later version
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       sharizard-wordpress

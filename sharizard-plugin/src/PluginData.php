@@ -82,7 +82,7 @@ if ( ! class_exists( PluginData::class ) ) {
 		 * @return string
 		 */
 		public static function get_plugin_display_name(): string {
-			return esc_html_x( 'Sharizard Wordpress', 'Plugin name for display', 'sharizard-wordpress' );
+			return esc_html_x( 'Simple Social Media Preview', 'Plugin name for display', 'sharizard-wordpress' );
 		}
 
 		/**
