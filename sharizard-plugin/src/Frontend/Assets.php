@@ -31,13 +31,6 @@ if ( ! class_exists( Assets::class ) ) {
 		 * Must register before we enqueue!
 		 */
 		public function enqueue_styles(): void {
-			$file_name = 'frontend';
-
-			$registered = $this->common_assets->register_style( $file_name );
-
-			if ( $registered ) {
-				$this->common_assets->enqueue_style( $file_name );
-			}
 		}
 
 		/**
@@ -46,18 +39,6 @@ if ( ! class_exists( Assets::class ) ) {
 		 * Must register before we enqueue!
 		 */
 		public function enqueue_scripts(): void {
-			global $wp_scripts;
-			$file_name = 'frontend';
-
-			$registered = $this->common_assets->register_script(
-				$file_name,
-				'',
-				[ 'jquery' ]
-			);
-
-			if ( $registered ) {
-				$this->common_assets->enqueue_script( $file_name );
-			}
 		}
 	}
 }

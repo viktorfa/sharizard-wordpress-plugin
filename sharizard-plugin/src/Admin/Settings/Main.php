@@ -149,7 +149,7 @@ if ( ! class_exists( Main::class ) ) {
 		 */
 		public function print_section_info()
 		{
-			print 'Enter your settings below:';
+			print 'Any CSS color is valid';
 		}
 
 		public function text_color_callback()
@@ -176,67 +176,6 @@ if ( ! class_exists( Main::class ) ) {
 		 * Register the JavaScript for the admin Settings Page area.
 		 */
 		public function enqueue_settings_page_assets() {
-			// CSS for our Settings Page.
-			/*wp_enqueue_style(
-				PluginData::get_asset_handle( 'admin-settings' ),
-				PluginData::get_assets_url_base() . 'admin-settings.css',
-				[
-					'wp-components',
-				],
-				PluginData::plugin_version(),
-				'all'
-			);
-
-			// JS for our Settings Page.
-			wp_enqueue_script(
-				PluginData::get_asset_handle( 'admin-settings' ),
-				PluginData::get_assets_url_base() . 'admin-settings.js',
-				[
-					'wp-api',
-					'wp-i18n',
-					'wp-components',
-					'wp-element',
-				],
-				PluginData::plugin_version(),
-				true
-			);*/
-			
-			$choices = new Choices();
-
-			wp_localize_script(
-				PluginData::get_asset_handle( 'admin-settings' ),
-				'settingsData', // Only loads when on the page so shouldn't be a conflicting name.
-				[
-					// The CSS ID into which our React app inserts its content.
-					'entryId'     => PluginData::plugin_text_domain(),
-					// Helpful for things like generating the <h1>.
-					'pluginInfo'  => [
-						'name'               => PluginData::get_plugin_display_name(),
-						'version'            => PluginData::plugin_version(),
-						'settingsWord'       => $this->settings->get_settings_word(),
-						'customizerPanelUrl' => ( new Customizer() )->get_link_to_customizer_panel(),
-					],
-					// The root location where we store images specific to the Admin area.
-					'imagesBaseUrl'   => PluginData::plugin_dir_url() . 'src/Admin/images/',
-					'optionsInfo' => [
-						/**
-						 * The option prefix, in case we want to do any filtering for just our stuff.
-						 *
-						 * @see \SharizardWordpress\Common\Settings\Main::get_option_prefix()
-						 */
-						'prefix' => $this->settings->get_option_prefix(),
-						// The list of each of our option names, regardless of 'show_in_rest'.
-
-						// Could be helpful but let's not by default for security reasons...
-						//'allKeys' => $this->settings->get_all_prefixed_options(),
-					],
-					'choicesFor' => [
-						'my_radio'        => $choices->get_choices_post_types( true ),
-						'my_multi_select' => $choices->get_1_through_10( true ),
-					],
-				]
-			);
-
 		}
 
 		/**

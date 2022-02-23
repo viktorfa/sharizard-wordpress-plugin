@@ -104,10 +104,6 @@ if ( ! class_exists( Init::class ) ) {
 			) {
 				return;
 			}
-
-			$customizer = new Customizer\Customizer();
-
-			$this->loader->add_action( 'customize_register', $customizer, 'customizer_options' );
 		}
 
 		/**
@@ -121,20 +117,7 @@ if ( ! class_exists( Init::class ) ) {
 				return;
 			}
 
-			$assets = new Admin\Assets();
-
-			// Enqueue plugin's admin assets
-			$this->loader->add_action( 'admin_enqueue_scripts', $assets, 'enqueue_styles' );
-			$this->loader->add_action( 'admin_enqueue_scripts', $assets, 'enqueue_scripts' );
-
 			$settings = new Admin\Settings\Main();
-
-			// Plugin action links
-			$this->loader->add_filter(
-				'plugin_action_links_' . PluginData::plugin_basename(),
-				$settings,
-				'customize_action_links'
-			);
 
 			// Admin menu
 			$this->loader->add_action( 'admin_menu', $settings, 'add_plugin_admin_menu' );
