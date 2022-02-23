@@ -23,7 +23,7 @@
     "build": "run-s build:*",
     "build:1unmin": "parcel build ./_entry/admin.js ./_entry/admin-settings.js ./_entry/frontend.js --detailed-report --no-minify --no-source-maps --public-url ./",
     "build:2min": "parcel build ./_entry/admin.js ./_entry/admin-settings.js ./_entry/frontend.js --detailed-report --out-dir dist/min --public-url ./",
-    "build:3pot": "tric site-cli i18n make-pot ./wp-content/plugins/sharizard-wordpress ./wp-content/plugins/sharizard-wordpress/languages/sharizard-wordpress.pot --headers='{\"Report-Msgid-Bugs-To\":\"Sharizard <https://www.example.com/>\"}' --exclude=\".cache,.github,.parcel-cache,_entry,test,tests\" --debug",
+    "_build:3pot": "tric site-cli i18n make-pot ./wp-content/plugins/sharizard-wordpress ./wp-content/plugins/sharizard-wordpress/languages/sharizard-wordpress.pot --headers='{\"Report-Msgid-Bugs-To\":\"Sharizard <https://www.example.com/>\"}' --exclude=\".cache,.github,.parcel-cache,_entry,test,tests\" --debug",
     "check-licenses": "run-p \"wp-scripts check-licenses --prod --gpl2\" \"wp-scripts check-licenses --dev\"",
     "cleanup": "rimraf .cache .parcel-cache dist",
     "nuke": "rimraf ./vendor ./node_modules; tric composer install; npm install",
@@ -41,17 +41,17 @@
     "extends @wordpress/browserslist-config"
   ],
   "dependencies": {
-    "react-notifications-component": "^3.0.3"
+    "react-notifications-component": "^3.4.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
+    "@babel/core": "^7.17.5",
     "@fullhuman/postcss-purgecss": "^2.3.0",
-    "@wordpress/scripts": "^12.6.0",
-    "autoprefixer": "^9.8.6",
+    "@wordpress/scripts": "^12.6.1",
+    "autoprefixer": "^9.8.8",
     "npm-run-all": "^4.1.5",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-externals": "^0.5.2",
-    "postcss": "^7.0.35",
+    "postcss": "^7.0.39",
     "postcss-advanced-variables": "^3.0.1",
     "postcss-import": "^12.0.1",
     "postcss-nested": "^4.2.3",
@@ -61,7 +61,7 @@
     "rimraf": "^3.0.2",
     "tailwindcss": "^1.9.6",
     "tsutils": "^2.29.0",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.10"
   },
   "externals": {
     "@wordpress/element": "wp.element"
