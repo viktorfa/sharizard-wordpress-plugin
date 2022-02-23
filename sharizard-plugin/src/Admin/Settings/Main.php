@@ -77,10 +77,99 @@ if ( ! class_exists( Main::class ) ) {
 				[ $this, 'settings_page' ]
 			);
 
+			add_settings_section(
+				"default", // ID
+				'My Custom Settings', // Title
+				array( $this, 'print_section_info' ), // Callback
+				$this->settings->get_settings_page_slug() // Page
+			);  
+	
+			add_settings_field(
+				'text_color', 
+				'Text color', 
+				array( $this, 'text_color_callback' ), 
+				$this->settings->get_settings_page_slug(), // Page
+				"default"
+			);  
+			add_settings_field(
+				'background_color', 
+				'Background color', 
+				array( $this, 'background_color_callback' ), 
+				$this->settings->get_settings_page_slug(), // Page
+				"default"
+			); 
+
 			// Empty if insufficient permissions. We don't want our data put to page source in that case (but the action would not fire successfully anyway).
 			if ( ! empty( $hook_suffix ) ) {
 				add_action( "admin_print_scripts-{$hook_suffix}", [ $this, 'enqueue_settings_page_assets' ] );
 			}
+		}
+
+		public function register_settings() {
+			register_setting(
+				$this->settings->get_option_prefix(),
+				$this->settings->get_prefixed_option_key( 'text_color' ),
+				/*[
+					'type'              => 'string',
+					'default'           => "#333",
+					'sanitize_callback' => 'rest_sanitize_string',
+					'show_in_rest'      => true,
+				]*/
+			);
+			register_setting(
+				$this->settings->get_option_prefix(),
+				$this->settings->get_prefixed_option_key( 'background_color' ),
+				/*[
+					'type'              => 'string',
+					'default'           => "#fff",
+					'sanitize_callback' => 'rest_sanitize_string',
+					'show_in_rest'      => true,
+				]*/
+			);
+		}
+
+		public function render_settings_form() {
+			?>
+				<div class="wrap">
+					<h1>My Settings</h1>
+					<form method="POST" action="options.php">
+						<?php
+							// This prints out all hidden setting fields
+							settings_fields( $this->settings->get_option_prefix(), );
+							do_settings_sections( $this->settings->get_settings_page_slug() );
+							submit_button();
+						?>
+					</form>
+				</div>
+			<?php
+		}
+
+		/** 
+		 * Print the Section text
+		 */
+		public function print_section_info()
+		{
+			print 'Enter your settings below:';
+		}
+
+		public function text_color_callback()
+		{
+			printf(
+				'<input type="text" id="%s" name="%s" value="%s" />',
+				$this->settings->get_prefixed_option_key( 'text_color' ),
+				$this->settings->get_prefixed_option_key( 'text_color' ),
+				esc_attr( get_option($this->settings->get_prefixed_option_key( 'text_color' )))
+			);
+		}
+
+		public function background_color_callback()
+		{
+			printf(
+				'<input type="text" id="%s" name="%s" value="%s" />',
+				$this->settings->get_prefixed_option_key( 'background_color' ),
+				$this->settings->get_prefixed_option_key( 'background_color' ),
+				esc_attr( get_option($this->settings->get_prefixed_option_key( 'background_color' )))
+			);
 		}
 
 		/**
@@ -88,7 +177,7 @@ if ( ! class_exists( Main::class ) ) {
 		 */
 		public function enqueue_settings_page_assets() {
 			// CSS for our Settings Page.
-			wp_enqueue_style(
+			/*wp_enqueue_style(
 				PluginData::get_asset_handle( 'admin-settings' ),
 				PluginData::get_assets_url_base() . 'admin-settings.css',
 				[
@@ -110,8 +199,8 @@ if ( ! class_exists( Main::class ) ) {
 				],
 				PluginData::plugin_version(),
 				true
-			);
-
+			);*/
+			
 			$choices = new Choices();
 
 			wp_localize_script(
@@ -191,8 +280,8 @@ if ( ! class_exists( Main::class ) ) {
 			}
 
 			printf(
-				'<div class="wrap" id="%s"></div>',
-				PluginData::plugin_text_domain()
+				'<div class="wrap" id="%s">%s</div>',
+				PluginData::plugin_text_domain(), $this->render_settings_form()
 			);
 		}
 

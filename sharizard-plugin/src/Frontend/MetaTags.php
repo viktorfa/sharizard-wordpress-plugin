@@ -1,6 +1,7 @@
 <?php
 
 namespace SharizardWordpress\Frontend;
+use SharizardWordpress\Common\Settings\Main as Common_Settings;
 
 // Abort if this file is called directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,6 +20,13 @@ if ( ! class_exists( MetaTags::class ) ) {
 	 * Call the run function to execute the list of actions and filters.
 	 */
 	class MetaTags {
+
+		/**
+		 * Get the Settings instance from Common.
+		 *
+		 * @var Common_Settings
+		 */
+		private $settings;
 
 		/**
 		 * The array of actions registered with WordPress.
@@ -42,6 +50,7 @@ if ( ! class_exists( MetaTags::class ) ) {
 				["hook" => "wp_head", "component" => $this, "callback" => "add_meta_tags", "priority" => 10, "accepted_args" => 0]
 			];
 			$this->filters = [];
+			$this->settings = new Common_Settings();
 		}
 
 		/**
@@ -124,13 +133,14 @@ if ( ! class_exists( MetaTags::class ) ) {
 					$excerpt = substr($excerpt, 0, 253) . "...";
 				}
 			}
-			$background_color = "fff";
-			$text_color = "333";
+
+			$text_color =  get_option($this->settings->get_prefixed_option_key( 'text_color' ));
+			$background_color =  get_option($this->settings->get_prefixed_option_key( 'background_color' ));
 
 			$title = urlencode(esc_html($title));
 			$excerpt = urlencode(esc_html($excerpt));
-			$background_color = urlencode(esc_html("#" . "fff"));
-			$text_color = urlencode(esc_html("#" . "333"));
+			$text_color = urlencode(esc_html($text_color));
+			$background_color = urlencode(esc_html($background_color));
 
 			$sharizard_link = "https://link.sharizard.com/v1/create?backgroundColor=$background_color&color=$text_color&subtitle=$excerpt&title=$title"
 

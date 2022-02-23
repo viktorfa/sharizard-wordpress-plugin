@@ -212,6 +212,22 @@ if ( ! class_exists( Main::class ) ) {
 			return $result;
 		}
 
+		public function settings_form() {
+			?>
+				<div class="wrap">
+					<h1>My Settings</h1>
+					<form method="post" action="options.php">
+					<?php
+						// This prints out all hidden setting fields
+						settings_fields( 'my_option_group' );
+						do_settings_sections( 'my-setting-admin' );
+						submit_button();
+					?>
+					</form>
+				</div>
+			<?php
+		}
+
 		/**
 		 * Register our settings so we can use the WordPress REST API to get/set them via React.
 		 *
@@ -221,6 +237,27 @@ if ( ! class_exists( Main::class ) ) {
 		 * @link https://make.wordpress.org/core/2019/10/03/wp-5-3-supports-object-and-array-meta-types-in-the-rest-api/
 		 */
 		public function register_settings() {
+			  unset($args);
+			  $args = array (
+						'type'      => 'input',
+						'subtype'   => 'text',
+						'id'    => 'plugin_name_example_setting',
+						'name'      => 'plugin_name_example_setting',
+						'required' => 'true',
+						'get_options_list' => '',
+						'value_type'=>'normal',
+						'wp_data' => 'option'
+					);
+			  add_settings_field(
+				$this->get_prefixed_option_key( 'my_toggle' ),
+				'My toggle',
+				array( $this, 'my_toggle_settings_field' ),
+				PluginData::plugin_text_domain_underscores(),
+				$this->get_prefixed_option_key( 'my_toggle' ),
+				$args
+			  );
+
+
 			register_setting(
 				$this->get_option_prefix(),
 				$this->get_prefixed_option_key( 'my_toggle' ),

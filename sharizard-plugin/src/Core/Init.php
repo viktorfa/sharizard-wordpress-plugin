@@ -74,15 +74,18 @@ if ( ! class_exists( Init::class ) ) {
 			// Example: $this->loader->add_filter( 'gform_currencies', $common, 'gf_currency_usd_whole_dollars', 50 );
 
 			// Settings Fields must not be behind an `is_admin()` check, since it's too late.
-			$settings = new Common\Settings\Main();
+			$common_settings = new Common\Settings\Main();
+			$admin_settings = new Admin\Settings\Main();
 
 			/**
 			 * If we don't use the 'rest_api_init' hook, things like getting public post types won't include custom
 			 * post types, even if 'show_in_rest' is true. This is also why registering the settings cannot be called
 			 * only if is_admin().
 			 */
-			$this->loader->add_action( 'admin_init', $settings, 'register_settings' );
-			$this->loader->add_action( 'rest_api_init', $settings, 'register_settings' );
+			//$this->loader->add_action( 'admin_init', $common_settings, 'register_settings' );
+			//$this->loader->add_action( 'rest_api_init', $common_settings, 'register_settings' );
+			$this->loader->add_action( 'admin_init', $admin_settings, 'register_settings' );
+			$this->loader->add_action( 'rest_api_init', $admin_settings, 'register_settings' );
 		}
 
 		/**
