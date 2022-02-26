@@ -15,6 +15,15 @@ if ( ! class_exists( Http::class ) ) {
 	 * Things related to HTTP, like $_GET, $_PUT, $_REQUEST, and such.
 	 */
 	class Http {
+		private static function sanitize($input) {
+			$valid_input = [];
+			if (inarray($input, $valid_input)) {
+				return $input;
+			} else {
+				return "";
+			}
+			
+		}
 
 		/**
 		 * Get the value of a $_REQUEST parameter, protecting against not existing and allowing custom escaping.
@@ -43,19 +52,19 @@ if ( ! class_exists( Http::class ) ) {
 			// If a GET request, ignore POST.
 			if ( 'GET' === $_SERVER['REQUEST_METHOD'] ) {
 				if ( isset( $_GET[ $param ] ) ) {
-					$result = $_GET[ $param ];
+					$result = sanitize($_GET[ $param ]);
 				}
 			}
 
 			// If not explicitly GET, check POST first, then GET, just like REQUEST does.
 			if ( ! isset( $result ) ) {
 				if ( isset( $_POST[ $param ] ) ) {
-					$result = $_POST[ $param ];
+					$result = sanitize($_POST[ $param ]);
 				}
 
 				if ( ! isset( $result ) ) {
 					if ( isset( $_GET[ $param ] ) ) {
-						$result = $_GET[ $param ];
+						$result = sanitize($_GET[ $param ]);
 					}
 				}
 			}

@@ -117,15 +117,17 @@ if ( ! class_exists( MetaTags::class ) ) {
 		}
 
 		public function add_meta_tags() {
-			
 			$title = get_bloginfo("name");
-			$excerpt = "";
+			$excerpt = get_bloginfo("description");
+			
 			if (is_single()) {
-				$title = get_post()->post_title;
+				$post = get_post();
+				$title = $post->post_title ? $post->post_title : $title;
 				$excerpt = get_the_excerpt();
 			}
 			elseif (is_page()) {
-				$title = get_page()->page_title;
+				$page = get_post();
+				$title = $page->page_title ? $page->page_title : $title;
 			}
 
 			if ($excerpt) {
@@ -142,7 +144,7 @@ if ( ! class_exists( MetaTags::class ) ) {
 			$text_color = urlencode(esc_html($text_color));
 			$background_color = urlencode(esc_html($background_color));
 
-			$sharizard_link = "https://link.sharizard.com/v1/create?backgroundColor=$background_color&color=$text_color&subtitle=$excerpt&title=$title"
+			$sharizard_link = "https://link.sharizard.com/v1/create?backgroundColor=$background_color&color=$text_color&title=$title&subtitle=$excerpt"
 
 
 
@@ -150,12 +152,12 @@ if ( ! class_exists( MetaTags::class ) ) {
 			?>
 				<meta 
 					name="twitter:image:src" 
-					content="<?php echo $sharizard_link?>"
+					content="<?php echo esc_html($sharizard_link)?>"
 				/>
 				<meta name="twitter:card" content="summary_large_image">
 				<meta 
 					property="og:image" 
-					content="<?php echo $sharizard_link?>"
+					content="<?php echo esc_html($sharizard_link)?>"
 				></meta>
 				<meta property="og:image:height" content="630"/>
 				<meta property="og:image:width" content="1200"/>

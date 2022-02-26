@@ -79,7 +79,7 @@ if ( ! class_exists( Main::class ) ) {
 
 			add_settings_section(
 				"default", // ID
-				'My Custom Settings', // Title
+				'Settings', // Title
 				array( $this, 'print_section_info' ), // Callback
 				$this->settings->get_settings_page_slug() // Page
 			);  
@@ -131,7 +131,7 @@ if ( ! class_exists( Main::class ) ) {
 		public function render_settings_form() {
 			?>
 				<div class="wrap">
-					<h1>My Settings</h1>
+					<h1>Simple Social Media Preview</h1>
 					<form method="POST" action="options.php">
 						<?php
 							// This prints out all hidden setting fields

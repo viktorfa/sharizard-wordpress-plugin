@@ -26,11 +26,10 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Simple Social Media Preview
- * Plugin URI:        https://www.sharizard.com/
  * Description:       Simple social media preview images that just work.
  * Version:           1.0.0
  * Author:            Sharizard
- * Author URI:        https://www.sharizard.com/
+ * Author URI:        https://sharizard.com/
  * License:           GPL version 3 or any later version
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       sharizard-wordpress
